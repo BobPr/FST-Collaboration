@@ -30,18 +30,24 @@ public class LinkedList{
 		}
 		 == > Refactor
 		*/
-
+		
+		LLElement prev_tail = tail;
 		LLElement tmp = new LLElement(i, null);
 		if(tail == null){
+			// so the list is empty
 			head = tmp;
+			tail = tmp;
+		}else{
+			tail = tmp;
+			prev_tail.next = tail;
 		}
-		tail = tmp;
+		
 		length++;
 		return tail;
 	}
 	
 	public class LLElement{
-		private LLElement next;
+		public LLElement next;
 		public Integer value;
 		
 		public LLElement(Integer i, LLElement par_next){
