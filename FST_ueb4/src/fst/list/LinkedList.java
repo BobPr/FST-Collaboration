@@ -1,8 +1,8 @@
 package fst.list;
 
-public class LinkedList<Object> {
-	private LLElement head,tail;
-	private int length;
+public class LinkedList{
+	public LLElement head,tail;
+	public int length;
 	
 	public LinkedList(){
 		head = null;
@@ -10,21 +10,49 @@ public class LinkedList<Object> {
 		length = 0;
 	}
 	
-	public LinkedList<Object> createList(){
-		return new LinkedList<Object>();
+	public LinkedList createList(){
+		return new LinkedList();
 	}
 	
 	public boolean isEmpty(){
 		return (length==0);
 	}
 	
-	class LLElement{
-		private LLElement prev, next;
-		private Object value;
+	public LLElement addToTail(Integer i){
+		/*if(tail == null){
+			// null, so nth in list yet
+			LLElement tmp = new LLElement(i, null);
+			head = tmp;
+			tail = tmp;
+		}else{
+			// not null
+			tail = new LLElement(i,null);
+		}
+		 == > Refactor
+		*/
+
+		LLElement tmp = new LLElement(i, null);
+		if(tail == null){
+			head = tmp;
+		}
+		tail = tmp;
+		length++;
+		return tail;
+	}
+	
+	public class LLElement{
+		private LLElement next;
+		public Integer value;
 		
-		public LLElement(LLElement par_prev, LLElement par_next){
-			prev = par_prev;
+		public LLElement(Integer i, LLElement par_next){
 			next = par_next;
+			value = i;
+		}
+		
+		// für carlo
+		public LLElement(Integer i){
+			next = null;
+			value = i;
 		}
 	}
 }
