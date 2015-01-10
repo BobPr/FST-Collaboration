@@ -79,11 +79,11 @@ public class LinkedListTest {
 	public void testAddToTail_LengthIsAppropriate(int i){
 		LinkedList a = getList(i);
 		// save old length
-		int old_length = a.length;
+		int old_length = a.length();
 		// run the operation to test
 		a.addToTail(42);
 		// run the assertion test
-		assertTrue("[L#"+i+"] Length of list is not appropriate", ((old_length+1) == a.length) );
+		assertTrue("[L#"+i+"] Length of list is not appropriate", ((old_length+1) == a.length()) );
 	}
 	@Theory
 	public void testAddToTail_PossibleToIterateOverList(int i){
@@ -135,7 +135,7 @@ public class LinkedListTest {
 	@Theory
 	public void testLength_AddingElementIncreasesLengthByOne(int i){
 		LinkedList a = getList(i);
-		int old_length = a.length;
+		int old_length = a.length();
 		// add element
 		a.addToTail(42);
 		// run the assertion test
@@ -144,7 +144,7 @@ public class LinkedListTest {
 	@Theory
 	public void testLength_DeletingElementDecreasesLengthByOne(int i){
 		LinkedList a = getList(i);
-		int old_length = a.length;
+		int old_length = a.length();
 		// delete element
 		boolean sthGotDeleted = a.deleteElement(0);
 		String errorMsg = "Deleting an element decreases the length not by one";
@@ -158,9 +158,64 @@ public class LinkedListTest {
 	/* ##############################################################################
     								deleteElement() Testing
 		@author Bob Prevos
-		@description testing if length:
-			- after adding an element increased
-			- after deleting an element decreased
-			- length of empty list is zero
+		@description testing if after deleteElement():
+			- delete head
+			- delete tail
+			- iterating over list after deleting still possible
+			- length is decreased after deleting an element (in testLength_DeletingElementDecreasesLengthByOne)
+	############################################################################## */
+	@Theory
+	public void testDeleteElement_DeleteHead(int i){
+		LinkedList a = getList(i);
+		LLElement old_head = a.head;
+		// delete the head
+		boolean sthGotDeleted = a.deleteElement(0);
+		
+		if(sthGotDeleted){
+			assertTrue("Head is the same as before", (old_head != a.head) );
+		}else{
+			assertTrue("Head is not the same as before", (old_head == a.head) );
+		}
+	}
+	@Theory
+	public void testDeleteElement_DeleteTail(int i){
+		LinkedList a = getList(i);
+		LLElement old_tail = a.tail;
+		// delete the tail
+		boolean sthGotDeleted = a.deleteElement(a.length()-1);
+		
+		if(sthGotDeleted){
+			assertTrue("Tail is the same as before", (old_tail != a.tail) );
+		}else{
+			assertTrue("Tail is not the same as before", (old_tail == a.tail) );
+		}
+	}
+	@Theory
+	public void testDeleteElement_PossibleToIterateThroughListAfterDeleting(int i){
+		LinkedList a = getList(i);
+		// delete an element
+		a.deleteElement(0);
+		// test to iterate through the list
+		LLElement tmp = a.head;
+		boolean reachedTail = false;
+		while(tmp != null){
+			System.out.println(tmp.value);
+			if(tmp == a.tail){
+				reachedTail = true;
+			}
+			tmp = tmp.next;
+		}
+		
+		if(a.head != null  && a.tail != null){
+			assertTrue("Tail couldnt be reached", reachedTail);
+		}
+	}
+	/* ##############################################################################
+										copyNode() Testing
+		@author Bob Prevos
+		@description testing if after copyNode():
+			- index2 == tail, so length is dublicated
+			- index2 == head, so value of index1 is new head
+			- index2 is not head and not tail, so element is doublicated
 	############################################################################## */
 }

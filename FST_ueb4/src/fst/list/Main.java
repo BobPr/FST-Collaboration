@@ -7,9 +7,11 @@ public class Main {
 		
 		System.out.println(tmp.isEmpty());
 		tmp.addToTail(1);
+		tmp.addToTail(2);
+		tmp.addToTail(3);
 		tmp.displayList();
-		
-		tmp.deleteElement(0);
+
+		tmp.copyNode(2,1);
 		//System.out.println("head="+tmp.head.value+" tail="+tmp.tail.value);
 		//System.out.println(tmp.length);
 		tmp.displayList();

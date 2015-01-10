@@ -2,7 +2,7 @@ package fst.list;
 
 public class LinkedList {
 	public LLElement head, tail;
-	public int length;
+	private int length;
 
 	public LinkedList() {
 		head = null;
@@ -188,7 +188,7 @@ public class LinkedList {
 		return length;
 	}
 	
-	// @author Bob Prevos
+	// @author Bob Prevos [tested]
 	public boolean deleteElement(int i){
 		if(length > 0){
 			if(length == 1){
@@ -202,7 +202,6 @@ public class LinkedList {
 			LLElement tmp = head, prev_tmp = null;
 			int index = 0;
 			while(tmp != null){
-				System.out.println(tmp.value);
 				if(index == i){
 					// element at index found
 					if(i == 0){
@@ -225,5 +224,53 @@ public class LinkedList {
 			}
 		}
 		return false;
+	}
+	
+	// @ author Bob Prevos
+	public void copyNode(int index1, int index2){
+		/*
+		kopiert ein Element von index1 nach index2. Ist index2
+		HEAD, so wird die Kopie als Kopfelement eingefügt, ist index2 TAIL,
+		so wird die Kopie der Liste angehangen */
+		
+		// index2 is head, add element as head
+		if(index2 == 0){
+			// TODO waiting for addToHead();
+			return;
+		}
+		
+		// index2 is tail, add a copy of the list at the end
+		if(index2 == (length-1)){
+			LLElement tmp = head;
+			Integer index = 0;
+			Integer start_length = length;
+			while(index < start_length){
+				addToTail(tmp.value);
+				tmp = tmp.next;
+				index++;
+			}
+			return;
+		}
+		
+		// index2 is not head & not tail
+		if( (index1 >= 0)  && (index1 <= (length-1)) && (index2 >= 0) && (index2 <= length-1) ) {
+			LLElement tmp = head, i1_ele = null, i2_ele = null;
+			Integer index = 0;
+			while(tmp != null){
+				// find both elements
+				if(index == index1){
+					i1_ele = tmp;
+				}
+				if(index == index2){
+					i2_ele = tmp;
+				}
+				tmp = tmp.next;
+				index++;
+			}
+			// elements found?
+			if((i1_ele != null) && (i2_ele != null)){
+				i2_ele.value = i1_ele.value;
+			}
+		}
 	}
 }
