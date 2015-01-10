@@ -61,4 +61,35 @@ public class LinkedList{
 			value = i;
 		}
 	}
+	
+	
+	/**
+	 * @return
+	 */
+	public String displayList(){
+		return null;
+	}
+	
+	/**
+	 * @param index
+	 * @return
+	 */
+	public int valueOfIndexElement(int index){
+		return -1;
+	}
+	
+	/**
+	 * 
+	 */
+	public LinkedList sortList(){
+		return this;
+	}
+	
+	/**
+	 * @param value
+	 * @return
+	 */
+	public int binSearch(int value){
+		return -10;
+	}
 }
