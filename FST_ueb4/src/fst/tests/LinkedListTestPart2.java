@@ -48,7 +48,7 @@ public class LinkedListTestPart2 extends LinkedListTest {
 	}
 
 	@Test
-	public void testDisplayListWithTenElements() {
+	public void testDisplayListWithSeveralElements() {
 		assertEquals(createExpectedStringOutput(12, 5, 37, 0, 99),
 				createList(12, 5, 37, 0, 99).displayList());
 	}
@@ -56,39 +56,44 @@ public class LinkedListTestPart2 extends LinkedListTest {
 	@Test
 	public void testSortListWithEmptyList() {
 		assertEquals(createExpectedStringOutput(), emptyList.sortList()
-				.displayList());
+				.toString());
 	}
 
 	@Test
 	public void testSortListWithOneElement() {
 		assertEquals(createExpectedStringOutput(5), createList(5).sortList()
-				.displayList());
+				.toString());
 	}
 
 	@Test
 	public void testSortListWithSeveralElements() {
 		assertEquals(createExpectedStringOutput(5, 9, 15, 17, 31, 48, 49, 50),
-				createList(15, 48, 5, 9, 50, 49, 17, 31).sortList().displayList());
+				createList(15, 48, 5, 9, 50, 49, 17, 31).sortList().toString());
+	}
+	
+	@Test(expected = UnsupportedOperationException.class)
+	public void testbinSearchtWithUnsortedList() {
+		createList(15, 48, 5, 9, 50, 49, 17, 31).binSearch(3);
 	}
 	
 	@Test
 	public void testbinSearchtWithInvalidValue() {
-		assertEquals(-1, createList(15, 48, 5, 9, 50, 49, 17, 31).binSearch(3));
+		assertEquals(-1, createList(5, 9, 15, 17, 31, 48, 49, 50).binSearch(3));
 	}
-	
+
 	@Test
 	public void testbinSearchtWithHead() {
-		assertEquals(5, createList(15, 48, 5, 9, 50, 49, 17, 31).binSearch(5));
+		assertEquals(0, createList(5, 9, 15, 17, 31, 48, 49, 50).binSearch(5));
 	}
-	
+
 	@Test
 	public void testbinSearchtWithTail() {
-		assertEquals(50, createList(15, 48, 5, 9, 50, 49, 17, 31).binSearch(50));
+		assertEquals(7, createList(5, 9, 15, 17, 31, 48, 49, 50).binSearch(50));
 	}
-	
+
 	@Test
 	public void testbinSearchtWithInnerValue() {
-		assertEquals(31, createList(15, 48, 5, 9, 50, 49, 17, 31).binSearch(31));
+		assertEquals(4, createList(5, 9, 15, 17, 31, 48, 49, 50).binSearch(31));
 	}
 
 }
