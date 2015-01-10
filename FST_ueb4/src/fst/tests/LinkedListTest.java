@@ -16,9 +16,6 @@ import fst.list.LinkedList;
 
 @RunWith(Theories.class)
 public class LinkedListTest {
-	protected static LinkedList emptyList;
-	protected static LinkedList oneElementList;
-	protected static LinkedList twoElementsList;
 
 	protected static LinkedList createList(int... values) {
 		LinkedList linkedList = new LinkedList();
