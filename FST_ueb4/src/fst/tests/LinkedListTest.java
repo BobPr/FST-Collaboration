@@ -28,7 +28,7 @@ public class LinkedListTest {
 	}
 	
 	private LinkedList getList(int i){
-		switch((i-1)){
+		switch(i){
 			// empty list
 			case 1: return createList();
 			// one element list
@@ -57,7 +57,7 @@ public class LinkedListTest {
 	public static @DataPoints int[] candidates = {1, 2, 3};
 	
 	/* ##############################################################################
-	                              addToTail Testing
+	                              addToTail() Testing
 	     @author Bob Prevos
 	     @description testing if after addToTail call:
 	     				- the tail is not null
@@ -118,4 +118,49 @@ public class LinkedListTest {
 		// run the assertion test
 		assertTrue("[L#"+i+"] Next of tail is not null", (a.tail.next == null) );
 	}
+	/* ##############################################################################
+								    length() Testing
+		@author Bob Prevos
+		@description testing if length:
+			- after adding an element increased
+			- after deleting an element decreased
+			- length of empty list is zero
+	############################################################################## */
+	@Test
+	public void testLength_EmptyListHasLengthZero(){
+		LinkedList a = getList(1);
+		// run the assertion test
+		assertTrue("Empty list has not length zero", (a.length() == 0));
+	}
+	@Theory
+	public void testLength_AddingElementIncreasesLengthByOne(int i){
+		LinkedList a = getList(i);
+		int old_length = a.length;
+		// add element
+		a.addToTail(42);
+		// run the assertion test
+		assertTrue("Adding Element increases the length not by one", ( (old_length+1) == a.length() ));
+	}
+	@Theory
+	public void testLength_DeletingElementDecreasesLengthByOne(int i){
+		LinkedList a = getList(i);
+		int old_length = a.length;
+		// delete element
+		boolean sthGotDeleted = a.deleteElement(0);
+		String errorMsg = "Deleting an element decreases the length not by one";
+		
+		if(sthGotDeleted){
+			assertTrue(errorMsg, ( (old_length-1) == a.length() ) );
+		}else{
+			assertTrue(errorMsg, (old_length == a.length()) );
+		}
+	}
+	/* ##############################################################################
+    								deleteElement() Testing
+		@author Bob Prevos
+		@description testing if length:
+			- after adding an element increased
+			- after deleting an element decreased
+			- length of empty list is zero
+	############################################################################## */
 }

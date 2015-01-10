@@ -9,22 +9,19 @@ public class LinkedList {
 		tail = null;
 		length = 0;
 	}
-
+	
+	// @author Bob Prevos
 	public LinkedList createList() {
 		return new LinkedList();
 	}
-
+	
+	// @author Bob Prevos
 	public boolean isEmpty() {
 		return (length == 0);
 	}
 
+	// @author Bob Prevos [tested]
 	public LLElement addToTail(Integer i) {
-		/*
-		 * if(tail == null){ // null, so nth in list yet LLElement tmp = new
-		 * LLElement(i, null); head = tmp; tail = tmp; }else{ // not null tail =
-		 * new LLElement(i,null); } == > Refactor
-		 */
-
 		LLElement prev_tail = tail;
 		LLElement tmp = new LLElement(i, null);
 		if (tail == null) {
@@ -184,5 +181,49 @@ public class LinkedList {
 		}
 
 		return -1;
+	}
+	
+	// @author Bob Prevos [tested]
+	public Integer length(){
+		return length;
+	}
+	
+	// @author Bob Prevos
+	public boolean deleteElement(int i){
+		if(length > 0){
+			if(length == 1){
+				// special case: head == tail !!
+				head = null;
+				tail = null;
+				length = 0;
+				return true;
+			}
+			// case: head != tail
+			LLElement tmp = head, prev_tmp = null;
+			int index = 0;
+			while(tmp != null){
+				System.out.println(tmp.value);
+				if(index == i){
+					// element at index found
+					if(i == 0){
+						// element is head
+						head = head.next;
+					}else if(tmp == tail){
+						// element is tail
+						tail = prev_tmp;
+						tail.next = null;
+					}else{
+						// element is in the middle
+						prev_tmp.next = tmp.next;
+					}
+					length--;
+					return true;
+				}
+				prev_tmp = tmp;
+				tmp = tmp.next;
+				index++;
+			}
+		}
+		return false;
 	}
 }
