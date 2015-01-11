@@ -21,16 +21,15 @@ public class LinkedListTestPart1 extends LinkedListTest {
 	int[] candidates = { 1, 2, 3 };
 
 	/*
-	 * ##########################################################################
-	 * #### addToTail() Testing
-	 * 
+	 * ##############################################################################
+	 * 								addToTail() Testing
 	 * @author Bob Prevos
-	 * 
-	 * @description testing if after addToTail call: - the tail is not null -
-	 * length is appropriate - possible to iterate over the list - tail has the
-	 * correct value - next of tail is null
-	 * #####################################
-	 * #########################################
+	 * @description testing if after addToTail call: 
+	 * - the tail is not null 
+	 * - length is appropriate
+	 * - possible to iterate over the list
+	 * - tail has the correct value - next of tail is null
+	 * ##############################################################################
 	 */
 	@Theory
 	public void testAddToTail_IsTailNotNull(int i) {
@@ -95,15 +94,14 @@ public class LinkedListTestPart1 extends LinkedListTest {
 	}
 
 	/*
-	 * ##########################################################################
-	 * #### length() Testing
-	 * 
+	 * ############################################################################## 
+	 * 								length() Testing
 	 * @author Bob Prevos
-	 * 
-	 * @description testing if length: - after adding an element increased -
-	 * after deleting an element decreased - length of empty list is zero
-	 * #######
-	 * #######################################################################
+	 * @description testing if length: 
+	 * - after adding an element increased 
+	 * - after deleting an element decreased 
+	 * - length of empty list is zero
+	 * ##############################################################################
 	 */
 	@Test
 	public void testLength_EmptyListHasLengthZero() {
@@ -139,17 +137,15 @@ public class LinkedListTestPart1 extends LinkedListTest {
 	}
 
 	/*
-	 * ##########################################################################
-	 * #### deleteElement() Testing
-	 * 
+	 * ############################################################################## 
+	 * 							deleteElement() Testing
 	 * @author Bob Prevos
-	 * 
-	 * @description testing if after deleteElement(): - delete head - delete
-	 * tail - iterating over list after deleting still possible - length is
-	 * decreased after deleting an element (in
-	 * testLength_DeletingElementDecreasesLengthByOne)
-	 * ##########################
-	 * ####################################################
+	 * @description testing if after deleteElement(): 
+	 * - delete head 
+	 * - delete tail - iterating over list after deleting still possible 
+	 * - length is decreased after deleting an element 
+	 * 		(in testLength_DeletingElementDecreasesLengthByOne)
+	 * ##############################################################################
 	 */
 	@Theory
 	public void testDeleteElement_DeleteHead(int i) {
@@ -203,16 +199,13 @@ public class LinkedListTestPart1 extends LinkedListTest {
 	}
 
 	/*
-	 * ##########################################################################
-	 * #### copyNode() Testing
-	 * 
+	 * ############################################################################## 
+	 * 								copyNode() Testing
 	 * @author Bob Prevos
-	 * 
 	 * @description testing if after copyNode(): - index2 == tail, so length is
 	 * dublicated - index2 == head, so value of index1 is new head TODO - index2
 	 * is not head and not tail, so element is doublicated
-	 * ######################
-	 * ########################################################
+	 * ##############################################################################
 	 */
 	@Theory
 	public void testCopyNode_Index2IsTailSoDoubleLengthAfterCopy(int i) {
@@ -235,5 +228,47 @@ public class LinkedListTestPart1 extends LinkedListTest {
 		a.copyNode(0, 1);
 		assertTrue("Copy of Node failed", (a.getHead().getValue() == a
 				.getHead().getNext().getValue()));
+	}
+	/*
+	 * ############################################################################## 
+	 * 								isEmpty() Testing
+	 * @author Bob Prevos
+	 * @description testing if isEmpty():
+	 * 	- after adding not empty anymore
+	 *  - after deleting last element is empty
+	 *  - is empty for empty list
+	 * ##############################################################################
+	 */
+	@Test
+	public void testIsEmpty_AfterAddingNotEmpty(){
+		LinkedList a = getList(1);
+		//add an element
+		a.addToTail(42);
+		assertTrue("Still empty after adding an element", (!a.isEmpty()));
+	}
+	@Test
+	public void testIsEmpty_AfterDeletingLastElement(){
+		LinkedList a = getList(2);
+		// delete last element
+		a.deleteElement(0);
+		assertTrue("Not empty after deleting last element", (a.isEmpty()));
+	}
+	@Test
+	public void testIsEmpty_ForEmptyList(){
+		LinkedList a = getList(1);
+		assertTrue("Not empty for empty list", (a.isEmpty()));
+	}
+	/*
+	 * ############################################################################## 
+	 * 								createList() Testing
+	 * @author Bob Prevos
+	 * @description testing if createList():
+	 * 	- creates a LinkedList with length = 0
+	 * ##############################################################################
+	 */
+	@Test
+	public void testCreateList_ListWithLengthZero(){
+		LinkedList a = LinkedList.createList();
+		assertTrue("Not a list with length zero", (a.isEmpty()));
 	}
 }

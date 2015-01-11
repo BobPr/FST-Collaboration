@@ -1,21 +1,17 @@
 package fst.list;
 
 public class LinkedList {
-	private LLElement head, tail;
-	private int length;
+	private LLElement head = null, tail = null;
+	private int length = 0;
 
-	public LinkedList() {
-		head = null;
-		tail = null;
-		length = 0;
-	}
+	private LinkedList() {}
 	
 	// @author Bob Prevos
-	public LinkedList createList() {
+	public static LinkedList createList() {
 		return new LinkedList();
 	}
 	
-	// @author Bob Prevos
+	// @author Bob Prevos [tested]
 	public boolean isEmpty() {
 		return (length == 0);
 	}
@@ -276,7 +272,8 @@ public class LinkedList {
 		}
 	}
 	
-	// needed for testing the LinkedList fully, ex. difference in Object
+	// needed for testing the LinkedList fully, 
+	// example: testing for same value but different LLElements
 	public LLElement getTail(){
 		return tail;
 	}

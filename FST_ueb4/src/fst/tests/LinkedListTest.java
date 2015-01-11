@@ -26,7 +26,7 @@ public class LinkedListTest {
 	}
 
 	protected LinkedList createList(int... values) {
-		LinkedList linkedList = new LinkedList();
+		LinkedList linkedList = LinkedList.createList();
 
 		for (int value : values) {
 			linkedList.addToTail(value);

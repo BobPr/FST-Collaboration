@@ -3,7 +3,7 @@ package fst.list;
 public class Main {
 
 	public static void main(String[] args) {
-		LinkedList tmp = new LinkedList();
+		LinkedList tmp = LinkedList.createList();
 		
 		System.out.println(tmp.isEmpty());
 		tmp.addToTail(1);
