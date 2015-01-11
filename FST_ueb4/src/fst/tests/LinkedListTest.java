@@ -35,6 +35,8 @@ public class LinkedListTest {
 			case 2: return createList(new Random().nextInt(100));
 			// two element list
 			case 3: return createList(new Random().nextInt(100), new Random().nextInt(100));
+			// three element list
+			case 4: return createList(new Random().nextInt(100), new Random().nextInt(100), new Random().nextInt(100));
 		}
 		return createList();
 	}
@@ -73,7 +75,7 @@ public class LinkedListTest {
 		a.addToTail(42);
 		
 		// run the assertion test
-		assertTrue("[L#"+i+"] Tail is null", (a.tail != null) );
+		assertTrue("[L#"+i+"] Tail is null", (a.getTail() != null) );
 	}
 	@Theory
 	public void testAddToTail_LengthIsAppropriate(int i){
@@ -91,15 +93,15 @@ public class LinkedListTest {
 		// run the operation to test
 		a.addToTail(42);
 		
-		LLElement tmp = a.head;
+		LLElement tmp = a.getHead();
 		LLElement last_seen = null;
 		// try to iterate over the list
 		while(tmp != null){
 			last_seen = tmp;
-			tmp = tmp.next;
+			tmp = tmp.getNext();
 		}
 		// run the assertion test
-		assertTrue("[L#"+i+"] Could not iterate completely through the list", (last_seen == a.tail) );
+		assertTrue("[L#"+i+"] Could not iterate completely through the list", (last_seen == a.getTail()) );
 	}
 	@Theory
 	public void testAddToTail_TailHasCorrectValue(int i){
@@ -108,7 +110,7 @@ public class LinkedListTest {
 		// run the operation to test
 		a.addToTail(test_value);
 		// run the assertion test
-		assertTrue("[L#"+i+"] Tail has wrong value", (a.tail.value == test_value) );
+		assertTrue("[L#"+i+"] Tail has wrong value", (a.getTail().getValue() == test_value) );
 	}
 	@Theory
 	public void testAddToTail_NextOfTailIsNull(int i){
@@ -116,7 +118,7 @@ public class LinkedListTest {
 		// run the operation to test
 		a.addToTail(42);
 		// run the assertion test
-		assertTrue("[L#"+i+"] Next of tail is not null", (a.tail.next == null) );
+		assertTrue("[L#"+i+"] Next of tail is not null", (a.getTail().getNext() == null) );
 	}
 	/* ##############################################################################
 								    length() Testing
@@ -167,27 +169,27 @@ public class LinkedListTest {
 	@Theory
 	public void testDeleteElement_DeleteHead(int i){
 		LinkedList a = getList(i);
-		LLElement old_head = a.head;
+		LLElement old_head = a.getHead();
 		// delete the head
 		boolean sthGotDeleted = a.deleteElement(0);
 		
 		if(sthGotDeleted){
-			assertTrue("Head is the same as before", (old_head != a.head) );
+			assertTrue("Head is the same as before", (old_head != a.getHead()) );
 		}else{
-			assertTrue("Head is not the same as before", (old_head == a.head) );
+			assertTrue("Head is not the same as before", (old_head == a.getHead()) );
 		}
 	}
 	@Theory
 	public void testDeleteElement_DeleteTail(int i){
 		LinkedList a = getList(i);
-		LLElement old_tail = a.tail;
+		LLElement old_tail = a.getTail();
 		// delete the tail
 		boolean sthGotDeleted = a.deleteElement(a.length()-1);
 		
 		if(sthGotDeleted){
-			assertTrue("Tail is the same as before", (old_tail != a.tail) );
+			assertTrue("Tail is the same as before", (old_tail != a.getTail()) );
 		}else{
-			assertTrue("Tail is not the same as before", (old_tail == a.tail) );
+			assertTrue("Tail is not the same as before", (old_tail == a.getTail()) );
 		}
 	}
 	@Theory
@@ -196,17 +198,16 @@ public class LinkedListTest {
 		// delete an element
 		a.deleteElement(0);
 		// test to iterate through the list
-		LLElement tmp = a.head;
+		LLElement tmp = a.getHead();
 		boolean reachedTail = false;
 		while(tmp != null){
-			System.out.println(tmp.value);
-			if(tmp == a.tail){
+			if(tmp == a.getTail()){
 				reachedTail = true;
 			}
-			tmp = tmp.next;
+			tmp = tmp.getNext();
 		}
 		
-		if(a.head != null  && a.tail != null){
+		if(a.getHead() != null  && a.getTail() != null){
 			assertTrue("Tail couldnt be reached", reachedTail);
 		}
 	}
@@ -215,7 +216,26 @@ public class LinkedListTest {
 		@author Bob Prevos
 		@description testing if after copyNode():
 			- index2 == tail, so length is dublicated
-			- index2 == head, so value of index1 is new head
+			- index2 == head, so value of index1 is new head TODO
 			- index2 is not head and not tail, so element is doublicated
 	############################################################################## */
+	@Theory
+	public void testCopyNode_Index2IsTailSoDoubleLengthAfterCopy(int i){
+		LinkedList a = getList(i);
+		int old_length = a.length();
+		//copy with index2 = tail
+		a.copyNode(0, (a.length()-1));
+		assertTrue("Number of elements didnt doubled", ( a.length() == (old_length*2)) );
+	}
+	@Test
+	public void testCopyNode_Index2IsNotHeadNorTailSoElementDoublicated(){
+		LinkedList a = getList(4);
+		// set value of sec pos to 42
+		a.getHead().getNext().setValue(42);
+		// set value of head to 21
+		a.getHead().setValue(21);
+		// copy head to second position
+		a.copyNode(0, 1);
+		assertTrue("Copy of Node failed", ( a.getHead().getValue() == a.getHead().getNext().getValue()) );
+	}
 }

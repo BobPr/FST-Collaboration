@@ -1,7 +1,7 @@
 package fst.list;
 
 public class LinkedList {
-	public LLElement head, tail;
+	private LLElement head, tail;
 	private int length;
 
 	public LinkedList() {
@@ -38,15 +38,14 @@ public class LinkedList {
 	}
 
 	public class LLElement {
-		public LLElement next;
-		public Integer value;
+		private LLElement next;
+		private int value;
 
 		public LLElement(Integer i, LLElement par_next) {
 			next = par_next;
 			value = i;
 		}
 
-		// für carlo
 		public LLElement(Integer i) {
 			next = null;
 			value = i;
@@ -56,7 +55,11 @@ public class LinkedList {
 		public String toString() {
 			return value + "";
 		}
-
+		
+		public void setNext(LLElement new_next){ next = new_next; }
+		public LLElement getNext(){ return next;  }
+		public void setValue(int i){ value = i; }
+		public int getValue(){ return value; }
 	}
 
 	/**
@@ -236,7 +239,6 @@ public class LinkedList {
 		// index2 is head, add element as head
 		if(index2 == 0){
 			// TODO waiting for addToHead();
-			return;
 		}
 		
 		// index2 is tail, add a copy of the list at the end
@@ -253,7 +255,7 @@ public class LinkedList {
 		}
 		
 		// index2 is not head & not tail
-		if( (index1 >= 0)  && (index1 <= (length-1)) && (index2 >= 0) && (index2 <= length-1) ) {
+		if( (index1 >= 0)  && (index1 <= (length-1)) && (index2 > 0) && (index2 < length-1)) {
 			LLElement tmp = head, i1_ele = null, i2_ele = null;
 			Integer index = 0;
 			while(tmp != null){
@@ -272,5 +274,14 @@ public class LinkedList {
 				i2_ele.value = i1_ele.value;
 			}
 		}
+	}
+	
+	// needed for testing the LinkedList fully, ex. difference in Object
+	public LLElement getTail(){
+		return tail;
+	}
+	
+	public LLElement getHead(){
+		return head;
 	}
 }
