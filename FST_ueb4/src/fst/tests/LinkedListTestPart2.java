@@ -70,12 +70,12 @@ public class LinkedListTestPart2 extends LinkedListTest {
 		assertEquals(createExpectedStringOutput(5, 9, 15, 17, 31, 48, 49, 50),
 				createList(15, 48, 5, 9, 50, 49, 17, 31).sortList().toString());
 	}
-	
+
 	@Test(expected = UnsupportedOperationException.class)
 	public void testbinSearchtWithUnsortedList() {
 		createList(15, 48, 5, 9, 50, 49, 17, 31).binSearch(3);
 	}
-	
+
 	@Test
 	public void testbinSearchtWithInvalidValue() {
 		assertEquals(-1, createList(5, 9, 15, 17, 31, 48, 49, 50).binSearch(3));
