@@ -16,6 +16,27 @@ public class LinkedList {
 		return (length == 0);
 	}
 
+	
+	/**
+	 * Adds a LLElement with Value at the first position to the LinkedList
+	 * @author Carlo
+	 * @param  value
+	 */
+	public void addToHead(int value){
+		LLElement newHead=new LLElement(value);
+		if(length==0){
+			head = newHead;
+			tail = newHead;
+		}else{
+			LLElement oldHead=head;
+			head = newHead;
+			head.next=oldHead;
+			}
+		length++;
+	}
+	
+	
+
 	// @author Bob Prevos [tested]
 	public LLElement addToTail(Integer i) {
 		LLElement prev_tail = tail;
@@ -32,6 +53,7 @@ public class LinkedList {
 		length++;
 		return tail;
 	}
+
 
 	public class LLElement {
 		private LLElement next;
@@ -281,4 +303,80 @@ public class LinkedList {
 	public LLElement getHead(){
 		return head;
 	}
+
+	
+	/**
+	 * Searches the LinkedList for the LLElement with the lowest index that has the given value
+	 * @author Carlo
+	 * @param  value
+	 * @return index -1 if no Element with this value is found
+	 */
+	public int indexOfValue(int value) throws Exception{
+		if(length==0){
+			return -1;
+		}		
+		LLElement current = head;		
+		if(current.value == value){
+			return 0;
+		}		
+		int index = 1;
+		while(index<length){		
+			current=current.next;
+			if(current.value==value){
+				return index;			
+			}
+			index++;
+		}
+		return -1;
+	}
+	
+	/**
+	 * Gives out the value of the LLElement at Index index to the console 
+	 * or a Message that there is no Element with the given index
+	 * @author Carlo
+	 * @param  index
+	 * @return result String for testing
+	 */
+	public String displayNode(int index){
+		String result;
+		if(index>=length||index<0){
+			result="There is no Element with Index="+index;
+			System.out.println(result);
+			return result;
+		}
+		LLElement current=getElement(index);
+		result="The Element with Index="+index+" has the value "+current.value;
+		System.out.println(result);
+		return result;
+	}
+	
+	/**
+	 * deletes all Elements, List is empty after this method
+	 * @author Carlo
+	 * @param  value
+	 */
+	public void deleteList(){
+		head=null;
+		tail=null;
+		length=0;
+	}
+	
+	
+	/**
+	 * Adds an LLElement with Value at the first position to the LinkedList
+	 * @author Carlo
+	 * @param index Index of Element that will be changed
+	 * @param  value New value of the Element at position index
+	 * @throws IndexOutOfBoundsException if the index is out of bounds
+	 */
+	public void editNode(int index, int value){
+		if(index>=length || index<0){
+			throw new IndexOutOfBoundsException("Trying to edit node with index out of bounds");
+		}
+		LLElement current=getElement(index);
+		current.value=value;
+	}
+	
+	
+	
 }

@@ -14,6 +14,7 @@ import fst.list.LinkedList;
 public class LinkedListTest {
 
 	protected LinkedList emptyList;
+	protected LinkedList fullList;
 	protected LinkedList oneElementList;
 	protected LinkedList twoElementsList;
 
@@ -23,6 +24,16 @@ public class LinkedListTest {
 		oneElementList = createList(new Random().nextInt(100));
 		twoElementsList = createList(new Random().nextInt(100),
 				new Random().nextInt(100));
+		
+		fullList = LinkedList.createList();
+		//fill fullList with elements
+		fullList.addToHead(4);
+		fullList.addToHead(3);
+		fullList.addToHead(3);
+		fullList.addToHead(3);
+		fullList.addToHead(2);
+		fullList.addToHead(1);
+		fullList.addToHead(0);
 	}
 
 	protected LinkedList createList(int... values) {

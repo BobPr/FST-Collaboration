@@ -2,6 +2,7 @@ package fst.list;
 
 public class Main {
 
+
 	public static void main(String[] args) {
 		LinkedList tmp = LinkedList.createList();
 		
@@ -15,6 +16,7 @@ public class Main {
 		//System.out.println("head="+tmp.head.value+" tail="+tmp.tail.value);
 		//System.out.println(tmp.length);
 		tmp.displayList();
+
 	}
 
 }
