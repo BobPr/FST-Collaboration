@@ -202,9 +202,10 @@ public class LinkedListTestPart1 extends LinkedListTest {
 	 * ############################################################################## 
 	 * 								copyNode() Testing
 	 * @author Bob Prevos
-	 * @description testing if after copyNode(): - index2 == tail, so length is
-	 * dublicated - index2 == head, so value of index1 is new head TODO - index2
-	 * is not head and not tail, so element is doublicated
+	 * @description testing if after copyNode(): 
+	 * - index2 == tail, so length is duplicated 
+	 * - index2 == head, so value of index1 is new head 
+	 * - index2 is not head and not tail, so element is doublicated
 	 * ##############################################################################
 	 */
 	@Theory
@@ -215,6 +216,17 @@ public class LinkedListTestPart1 extends LinkedListTest {
 		a.copyNode(0, (a.length() - 1));
 		assertTrue("Number of elements didnt doubled",
 				(a.length() == (old_length * 2)));
+	}
+	
+	@Theory
+	public void testCopyNode_Index2IsHeadSoValOfNewHeadIsOfIndex1(int i){
+		LinkedList a = getList(3);
+		int old_val = a.getTail().getValue();
+		// calc index of tail of the list
+		int tail_index = a.length()-1;
+		// copy last element as new head
+		a.copyNode(tail_index, 0);
+		assertTrue("New Head has wrong value", (a.getHead().getValue() == old_val));
 	}
 
 	@Test

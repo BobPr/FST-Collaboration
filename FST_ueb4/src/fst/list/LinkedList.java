@@ -6,12 +6,17 @@ public class LinkedList {
 
 	private LinkedList() {}
 	
-	// @author Bob Prevos
+	/**  create an empty list
+	 * @author Bob Prevos
+	 * @return
+	 */
 	public static LinkedList createList() {
 		return new LinkedList();
 	}
-	
-	// @author Bob Prevos [tested]
+	/**   checks if the list is empty or not
+	 * @author Bob Prevos
+	 * @return
+	 */
 	public boolean isEmpty() {
 		return (length == 0);
 	}
@@ -35,9 +40,11 @@ public class LinkedList {
 		length++;
 	}
 	
-	
-
-	// @author Bob Prevos [tested]
+	/**  add an element at the end of the list
+	 * @author Bob Prevos
+	 * @param int i
+	 * @return
+	 */
 	public LLElement addToTail(Integer i) {
 		LLElement prev_tail = tail;
 		LLElement tmp = new LLElement(i, null);
@@ -203,13 +210,19 @@ public class LinkedList {
 
 		return -1;
 	}
-	
-	// @author Bob Prevos [tested]
+	/** return the number of elements in the list
+	 * @author Bob Prevos
+	 * @return
+	 */
 	public Integer length(){
 		return length;
 	}
 	
-	// @author Bob Prevos [tested]
+	/**  delete element at index i
+	 * @author Bob Prevos
+	 * @param int i
+	 * @return
+	 */
 	public boolean deleteElement(int i){
 		if(length > 0){
 			if(length == 1){
@@ -247,7 +260,13 @@ public class LinkedList {
 		return false;
 	}
 	
-	// @ author Bob Prevos
+	/**  copies an element from index1 to index2,
+	 * if index2 is HEAD, the copy will be added as new HEAD
+	 * if index2 is TAIL, a copy of the list will be added at the end
+	 * @author Bob Prevos
+	 * @param int index1, index2
+	 * @return
+	 */
 	public void copyNode(int index1, int index2){
 		/*
 		kopiert ein Element von index1 nach index2. Ist index2
@@ -255,8 +274,14 @@ public class LinkedList {
 		so wird die Kopie der Liste angehangen */
 		
 		// index2 is head, add element as head
-		if(index2 == 0){
-			// TODO waiting for addToHead();
+		if(index2 == 0 && index1 >=0 && index1 <= (length-1)){
+			// find elment of index1
+			LLElement tmp = head;
+			for(int i=0; i<index1; i++){
+				tmp = tmp.getNext();
+			}
+			System.out.println(tmp.getValue());
+			this.addToHead(tmp.getValue());
 		}
 		
 		// index2 is tail, add a copy of the list at the end

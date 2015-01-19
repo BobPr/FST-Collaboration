@@ -12,9 +12,8 @@ public class Main {
 		tmp.addToTail(3);
 		tmp.displayList();
 
-		tmp.copyNode(2,1);
-		//System.out.println("head="+tmp.head.value+" tail="+tmp.tail.value);
-		//System.out.println(tmp.length);
+		tmp.copyNode(2,0);
+		
 		tmp.displayList();
 
 	}
